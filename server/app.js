@@ -1,7 +1,17 @@
 const express = require('express')
 const app = express()
+const config = require('./config')
+const mongoose = require("mongoose");
 
 const goalsRoutes = require('./routes/goals')
+
+mongoose.connect(
+    config.mongoURL,
+    {
+      useMongoClient: true
+    }
+  );
+  mongoose.Promise = global.Promise;
 
 app.use('/goals', goalsRoutes);
 

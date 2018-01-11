@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/kovsky0/daily-progress#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mongoose": "^4.13.9"
   },
   "devDependencies": {
     "nodemon": "^1.14.10"
