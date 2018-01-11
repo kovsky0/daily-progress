@@ -1,0 +1,29 @@
+{
+  "name": "dailyprogress",
+  "version": "1.0.0",
+  "description": "An app for tracking daily goals based on best science-based practices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kovsky0/daily-progress.git"
+  },
+  "keywords": [
+    "restful",
+    "api",
+    "node",
+    "express",
+    "psychology"
+  ],
+  "author": "Daniel Wyrzykowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kovsky0/daily-progress/issues"
+  },
+  "homepage": "https://github.com/kovsky0/daily-progress#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
