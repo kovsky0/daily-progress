@@ -18,8 +18,8 @@ mongoose.Promise = global.Promise
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use('api/goals', goalsRoutes)
-app.use('api/user', userRoutes)
+app.use('/api/goals', goalsRoutes)
+app.use('/api/user', userRoutes)
 
 app.use((req, res, next) => {
     const error = new Error("Not found")
