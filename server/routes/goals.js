@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const GoalsController = require('../controllers/GoalsController')
+const checkAuth = require('../middleware/check-auth')
 
-router.get('/', GoalsController.getAll)
-router.post('/', GoalsController.create)
-router.get('/:id', GoalsController.get)
-router.patch('/:id', GoalsController.update)
-router.delete('/:id', GoalsController.delete)
+router.get('/', checkAuth, GoalsController.getAll)
+router.post('/', checkAuth, GoalsController.create)
+router.get('/:id', checkAuth, GoalsController.get)
+router.patch('/:id', checkAuth, GoalsController.update)
+router.delete('/:id', checkAuth, GoalsController.delete)
 
 module.exports = router
