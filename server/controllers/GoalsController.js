@@ -93,9 +93,17 @@ exports.update = (req, res, next) => {
     Goal.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
-            res.status(200).json({
-                message: "Goal with id: " + id + " has been updated."
-            })
+            if (result.n) {
+                res.status(200).json({
+                    message: "Goal with id: " + id + " has been updated."
+                })
+            } else {
+                res.status(404).json({
+                    error: {
+                        message: "Goal with given id does not exist."
+                    }
+                })
+            }  
         })
         .catch(err => {
             console.log(err)
