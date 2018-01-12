@@ -13,31 +13,33 @@ exports.signup = (req, res, next) => {
                 return res.status(422).json({
                     message: "This email is already registered"
                 })
-            } else {
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    if (err) {
+            }
+
+            bcrypt.hash(req.body.password, 10, (err, hash) => {
+                if (err) {
+                    console.log(err)
+                    return res.status(500).json({ err })
+                }
+
+                const user = new User({
+                    _id: new mongoose.Types.ObjectId(),
+                    email: req.body.email,
+                    password: hash
+                })
+
+                user.save()
+                    .then(result => {
+                        res.status(201).json({
+                            message: "User created"
+                        })
+                    })
+                    .catch(err => {
                         console.log(err)
                         res.status(500).json({ err })
-                    } else {
-                        const user = new User({
-                            _id: new mongoose.Types.ObjectId(),
-                            email: req.body.email,
-                            password: hash
-                        })
-
-                        user.save()
-                            .then(result => {
-                                res.status(201).json({
-                                    message: "User created"
-                                })
-                            })
-                            .catch(err => {
-                                console.log(err)
-                                res.status(500).json({ err })
-                            })
-                    }
-                })
-            }
+                    })
+                
+            })
+            
         })
         .catch(err => {
             console.log(err)
