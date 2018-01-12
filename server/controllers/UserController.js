@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const config = require('../config')
 
 const User = require('../models/User.js')
 
@@ -25,7 +27,6 @@ exports.signup = (req, res, next) => {
 
                         user.save()
                             .then(result => {
-                                console.log(result)
                                 res.status(201).json({
                                     message: "User created"
                                 })
@@ -45,5 +46,52 @@ exports.signup = (req, res, next) => {
 }
 
 exports.signin = (req, res, next) => {
-    //signin logic
+    User.find({ email: req.body.email })
+        .exec()
+        .then(result => {
+            if (result.length < 1) {
+                return res.status(401).json({
+                    error: {
+                        message: "Authorization failed."
+                    }
+                })
+            }
+            
+            bcrypt.compare(req.body.password, result[0].password, (err, authenticated) => {
+                if (err) {
+                    return res.status(401).json({
+                        error: {
+                            message: "Authorization failed."
+                        }
+                    })
+                }
+
+                if (!authenticated) { //passwords do not match
+                    return res.status(401).json({
+                        error: {
+                            message: "Authorization failed."
+                        }
+                    })
+                }
+
+                const token = jwt.sign(
+                    {
+                        email: result[0].email,
+                        userId: result[0]._id
+                    },
+                    config.jwtKey,
+                    {
+                        expiresIn: "1h"
+                    }
+                )
+                res.status(200).json({ 
+                    message: "Authentication successful",
+                    token: token
+                })
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ err })
+        })
 }
