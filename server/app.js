@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 
 const goalsRoutes = require('./routes/goals')
+const userRoutes = require('./routes/user')
 
 mongoose.connect(
     config.mongoURL,
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use('/goals', goalsRoutes)
+app.use('/user', userRoutes)
 
 app.use((req, res, next) => {
     const error = new Error("Not found")
