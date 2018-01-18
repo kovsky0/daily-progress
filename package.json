@@ -4,7 +4,7 @@
   "description": "An app for tracking daily goals based on best science-based practices",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon server/server.js"
   },
   "repository": {
@@ -32,6 +32,7 @@
     "mongoose": "^4.13.9"
   },
   "devDependencies": {
+    "jest": "^22.1.2",
     "nodemon": "^1.14.10"
   }
 }
