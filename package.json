@@ -32,7 +32,10 @@
     "mongoose": "^4.13.9"
   },
   "devDependencies": {
+    "iconv-lite": "^0.4.19",
     "jest": "^22.1.2",
-    "nodemon": "^1.14.10"
+    "nodemon": "^1.14.10",
+    "sinon": "^4.1.6",
+    "supertest": "^3.0.0"
   }
 }
